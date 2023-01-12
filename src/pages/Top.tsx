@@ -1,3 +1,3 @@
 export const Top = () => {
-  return <h1>Hello World!</h1>;
+  return <h1>Top Page</h1>;
 };
