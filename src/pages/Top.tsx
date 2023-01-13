@@ -7,7 +7,7 @@ import { Window } from '../components/Window';
 export const Top = () => {
   const navigate = useNavigate();
 
-  const onclickEnter = () => navigate('/stage');
+  const onclickEnter = () => navigate('/select');
 
   return (
     <Window>
@@ -21,5 +21,4 @@ export const Top = () => {
 
 const _Wrapper = styled.div`
   margin-top: 100px;
-  text-align: center;
 `;

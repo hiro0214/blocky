@@ -12,7 +12,6 @@ export const Title: FC<Props> = memo((props) => {
 });
 
 const _Text = styled.p`
-  font-size: 80px;
+  font-size: 70px;
   font-weight: bold;
-  text-align: center;
 `;

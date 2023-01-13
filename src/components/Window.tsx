@@ -20,4 +20,5 @@ const _Container = styled.div`
   background: #fff;
   border: 4px solid #a0aec0;
   border-radius: 6px;
+  text-align: center;
 `;
