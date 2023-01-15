@@ -19,6 +19,6 @@ const _Main = styled.main`
 `;
 
 const _Container = styled.div`
-  width: 1200px;
+  width: 1000px;
   height: 650px;
 `;

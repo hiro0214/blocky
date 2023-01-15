@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import { Button } from '../components/Button';
 import { Title } from '../components/Title';
 import { Window } from '../components/Window';
-
-const stageLength = 10;
+import data from '../data.json';
 
 export const Select = () => {
   const [stage, setStage] = useState('1');
@@ -20,7 +19,7 @@ export const Select = () => {
       <Title text={'STAGE SELECT'} />
       <_Text>ステージを選択してください</_Text>
       <_Select name={'stage'} onChange={(e) => onchangeStage(e)} value={stage}>
-        {[...Array(stageLength)].map((_, i) => (
+        {[...Array(data.length)].map((_, i) => (
           <option key={i} value={i + 1}>
             Stage {i + 1}
           </option>
