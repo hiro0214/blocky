@@ -1,21 +1,38 @@
 import { FC, memo } from 'react';
 import styled, { css } from 'styled-components';
+import { EnemyType } from '../types/stage';
+import { Enemy } from './Enemy';
 
 type Props = {
+  coordinate: [number, number];
   value: number;
+  enemies: EnemyType[];
 };
 
 export const Cell: FC<Props> = memo((Props) => {
-  const { value } = Props;
+  const { coordinate, value, enemies } = Props;
 
+  const enemy = enemies.find((v) => v.coordinate[0] === coordinate[0] && v.coordinate[1] === coordinate[1]);
   let cell;
 
   if (value === 0) {
-    cell = <_Cell_0 />;
+    cell = enemy ? (
+      <_Cell_0>
+        <Enemy id={enemy.id} direction={enemy.direction} />
+      </_Cell_0>
+    ) : (
+      <_Cell_0 />
+    );
   } else if (value === 1) {
     cell = <_Cell_1 />;
   } else if (value === 2) {
-    cell = <_Cell_2 />;
+    cell = enemy ? (
+      <_Cell_2>
+        <Enemy id={enemy.id} direction={enemy.direction} />
+      </_Cell_2>
+    ) : (
+      <_Cell_2 />
+    );
   } else if (value === 3) {
     cell = <_Cell_3 />;
   } else if (value === 4) {
@@ -34,10 +51,12 @@ const _Cell = styled.td`
   width: 40px;
   height: 40px;
   border: 1px solid #64748b;
+  &::after {
+    position: absolute;
+  }
 `;
 
 const _CollapseCell = css`
-  position: absolute;
   top: 50%;
   left: 0;
   right: 0;
@@ -54,12 +73,13 @@ const _Cell_1 = styled(_Cell)`
 `;
 
 const _Cell_2 = styled(_Cell)`
-  padding: 3px;
   &::after {
     content: '';
-    display: block;
-    width: 100%;
-    height: 100%;
+    top: 2px;
+    left: 2px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    background: #e2041b15;
     outline: 1px solid #e2041b;
     border-radius: 2px;
   }

@@ -1,34 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Cell } from '../components/Cell';
-import data from '../data.json';
-
-type EnemyType = {
-  id: number;
-  coordinate: [number, number];
-  direction: 'up' | 'left' | 'right' | 'down';
-};
-
-type StageType = {
-  id: string;
-  stage: number[][];
-  enemy: EnemyType[];
-};
-
-const initialStageData: StageType = {
-  id: '',
-  stage: [[]],
-  enemy: [],
-};
+import { useStage } from '../hooks/useStage';
 
 export const Stage = () => {
-  const [stageData, setStage] = useState<StageType>(initialStageData);
+  const { stageData, enemyData, init } = useStage();
   const params = useParams<{ id: string }>();
 
   useEffect(() => {
-    const stageData = data.find((v) => v.id === params.id) as StageType;
-    setStage(stageData);
+    params.id && init(params.id);
   }, [params]);
 
   return (
@@ -36,10 +17,10 @@ export const Stage = () => {
       <_StageWrapper>
         <_Stage>
           <tbody>
-            {[...Array(stageData.stage.length)].map((_, i) => (
+            {[...Array(stageData.length)].map((_, i) => (
               <tr key={i}>
-                {[...Array(stageData.stage[i].length)].map((_, j) => (
-                  <Cell key={j} value={stageData.stage[i][j]} />
+                {[...Array(stageData[i].length)].map((_, j) => (
+                  <Cell key={j} coordinate={[j, i]} value={stageData[i][j]} enemies={enemyData} />
                 ))}
               </tr>
             ))}
