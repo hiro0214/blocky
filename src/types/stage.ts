@@ -1,7 +1,10 @@
+export type DirectionType = 'up' | 'left' | 'right' | 'down';
+
 export type EnemyType = {
   id: number;
   coordinate: [number, number];
-  direction: 'up' | 'left' | 'right' | 'down';
+  currentDirection: number;
+  directionValue: DirectionType[];
 };
 
 export type StageType = {

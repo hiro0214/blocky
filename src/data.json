@@ -11,23 +11,27 @@
     "enemy": [
       {
         "id": 1,
-        "coordinate": [0, 2],
-        "direction": "up"
+        "coordinate": [1, 4],
+        "currentDirection": 0,
+        "directionValue": ["up", "down"]
       },
       {
         "id": 1,
         "coordinate": [1, 0],
-        "direction": "left"
+        "currentDirection": 0,
+        "directionValue": ["left", "right"]
       },
       {
         "id": 1,
-        "coordinate": [1, 3],
-        "direction": "right"
+        "coordinate": [3, 2],
+        "currentDirection": 1,
+        "directionValue": ["left", "right"]
       },
       {
         "id": 1,
-        "coordinate": [4, 1],
-        "direction": "down"
+        "coordinate": [2, 3],
+        "currentDirection": 1,
+        "directionValue": ["up", "down"]
       }
     ]
   },

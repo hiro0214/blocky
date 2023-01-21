@@ -5,11 +5,11 @@ import { Cell } from '../components/Cell';
 import { useStage } from '../hooks/useStage';
 
 export const Stage = () => {
-  const { stageData, enemyData, init } = useStage();
+  const { stageData, enemyData, initData, turn } = useStage();
   const params = useParams<{ id: string }>();
 
   useEffect(() => {
-    params.id && init(params.id);
+    params.id && initData(params.id);
   }, [params]);
 
   return (
@@ -28,7 +28,9 @@ export const Stage = () => {
         </_Stage>
       </_StageWrapper>
 
-      <_Hoge></_Hoge>
+      <_Hoge>
+        <button onClick={turn}>ボタン</button>
+      </_Hoge>
     </_Container>
   );
 };

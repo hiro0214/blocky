@@ -1,10 +1,11 @@
 import { FC, memo } from 'react';
 import styled from 'styled-components';
 import enemyData from '../enemy.json';
+import { DirectionType } from '../types/stage';
 
 type Props = {
   id: number;
-  direction: 'up' | 'left' | 'right' | 'down';
+  direction: DirectionType;
 };
 
 export const Enemy: FC<Props> = memo((Props) => {

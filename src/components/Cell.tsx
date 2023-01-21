@@ -18,7 +18,7 @@ export const Cell: FC<Props> = memo((Props) => {
   if (value === 0) {
     cell = enemy ? (
       <_Cell_0>
-        <Enemy id={enemy.id} direction={enemy.direction} />
+        <Enemy id={enemy.id} direction={enemy.directionValue[enemy.currentDirection]} />
       </_Cell_0>
     ) : (
       <_Cell_0 />
@@ -28,7 +28,7 @@ export const Cell: FC<Props> = memo((Props) => {
   } else if (value === 2) {
     cell = enemy ? (
       <_Cell_2>
-        <Enemy id={enemy.id} direction={enemy.direction} />
+        <Enemy id={enemy.id} direction={enemy.directionValue[enemy.currentDirection]} />
       </_Cell_2>
     ) : (
       <_Cell_2 />
