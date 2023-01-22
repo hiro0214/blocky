@@ -36,9 +36,12 @@ export const useStage = () => {
     }
 
     const cellValue = stage[coordinate[1]][coordinate[0]];
-
     if (directionEnd || (cellValue !== 0 && cellValue !== 2)) {
-      enemy.currentDirection = enemy.currentDirection === enemy.directionValue.length - 1 ? 0 : +1;
+      if (enemy.currentDirection === enemy.directionValue.length - 1) {
+        enemy.currentDirection = 0;
+      } else {
+        enemy.currentDirection += 1;
+      }
     }
   }, []);
 
@@ -54,6 +57,8 @@ export const useStage = () => {
     (enemy: EnemyType) => {
       const direction = enemy.directionValue[enemy.currentDirection];
 
+      // その方向に進めるか判定する[WIP]
+      //
       if (direction === 'up') toUp(enemy);
       else if (direction === 'left') toLeft(enemy);
       else if (direction === 'right') toRight(enemy);
@@ -64,13 +69,24 @@ export const useStage = () => {
     [stageData]
   );
 
+  const checkGoal = useCallback(() => {
+    const cellValues = enemyData.map((enemy) => stageData[enemy.coordinate[1]][enemy.coordinate[0]]);
+    if (cellValues.every((v) => v === 2)) gameComplete();
+  }, [enemyData]);
+
+  const gameComplete = useCallback(() => {
+    setTimeout(() => {
+      alert('GAME CLEAR!!');
+      navigate('/result');
+    }, 100);
+  }, []);
+
   const turn = useCallback(() => {
     enemyData.map((enemy) => moveEnemy(enemy));
 
     setEnemyData([...enemyData]);
 
-    // ゴールの判定
-    //
+    checkGoal();
   }, [enemyData]);
 
   return { stageData, enemyData, initData, turn };

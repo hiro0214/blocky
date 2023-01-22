@@ -2,10 +2,10 @@
   {
     "id": "1",
     "stage": [
-      [0, 0, 0, 0, 0],
+      [1, 0, 0, 0, 2],
       [0, 1, 1, 0, 0],
-      [0, 0, 1, 0, 0],
-      [0, 2, 0, 1, 0],
+      [0, 2, 1, 0, 0],
+      [0, 0, 0, 1, 0],
       [1, 0, 0, 1, 0]
     ],
     "enemy": [
@@ -17,21 +17,9 @@
       },
       {
         "id": 1,
-        "coordinate": [1, 0],
+        "coordinate": [2, 0],
         "currentDirection": 0,
         "directionValue": ["left", "right"]
-      },
-      {
-        "id": 1,
-        "coordinate": [3, 2],
-        "currentDirection": 1,
-        "directionValue": ["left", "right"]
-      },
-      {
-        "id": 1,
-        "coordinate": [2, 3],
-        "currentDirection": 1,
-        "directionValue": ["up", "down"]
       }
     ]
   },
