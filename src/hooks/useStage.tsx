@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import data from '../data.json';
 import { EnemyType, StageType } from '../types/stage';
@@ -6,9 +6,10 @@ import { EnemyType, StageType } from '../types/stage';
 export const useStage = () => {
   const [stageData, setStageData] = useState<number[][]>([]);
   const [enemyData, setEnemyData] = useState<EnemyType[]>([]);
+  const timerId = useRef<number>();
   const navigate = useNavigate();
 
-  const initData = useCallback((id: string) => {
+  const initStage = useCallback((id: string) => {
     const targetData = data.find((v) => v.id === id) as StageType | undefined;
     if (targetData) {
       const stage = targetData.stage;
@@ -69,25 +70,31 @@ export const useStage = () => {
     [stageData]
   );
 
+  const gameComplete = useCallback(() => {
+    setTimeout(() => {
+      alert('GAME CLEAR!!');
+      clearInterval(timerId.current);
+      timerId.current = undefined;
+      navigate('/result');
+    }, 100);
+  }, []);
+
   const checkGoal = useCallback(() => {
     const cellValues = enemyData.map((enemy) => stageData[enemy.coordinate[1]][enemy.coordinate[0]]);
     if (cellValues.every((v) => v === 2)) gameComplete();
   }, [enemyData]);
 
-  const gameComplete = useCallback(() => {
-    setTimeout(() => {
-      alert('GAME CLEAR!!');
-      navigate('/result');
-    }, 100);
-  }, []);
-
   const turn = useCallback(() => {
     enemyData.map((enemy) => moveEnemy(enemy));
-
     setEnemyData([...enemyData]);
-
     checkGoal();
   }, [enemyData]);
 
-  return { stageData, enemyData, initData, turn };
+  const start = useCallback(() => {
+    timerId.current = setInterval(() => {
+      turn();
+    }, 500);
+  }, [enemyData]);
+
+  return { stageData, enemyData, initStage, start };
 };
